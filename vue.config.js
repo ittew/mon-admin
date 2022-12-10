@@ -21,5 +21,13 @@ module.exports = defineConfig({
         symbolId: 'icon-[name]'
       })
       .end()
+  },
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:4000/',
+        changeOrigin: true
+      }
+    }
   }
 })

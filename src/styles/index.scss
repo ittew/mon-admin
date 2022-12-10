@@ -49,3 +49,7 @@ div:focus {
     height: 0;
   }
 }
+
+.el-input__inner::placeholder {
+  color: #999;
+}
