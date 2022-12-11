@@ -51,6 +51,7 @@
 import { ref } from 'vue'
 import { validatePassword } from './rules'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 // 数据源
 const loginForm = ref({
   username: 'super-admin',
@@ -82,6 +83,7 @@ const changeType = () => {
 const loading = ref(false)
 const loginFormRef = ref(null)
 const store = useStore()
+const router = useRouter()
 const loginHandle = () => {
   loginFormRef.value.validate(valid => {
     if (!valid) return
@@ -89,7 +91,7 @@ const loginHandle = () => {
     store
       .dispatch('user/login', loginForm.value)
       .then(res => {
-        console.log(res)
+        router.push('/')
       })
       .catch(err => {
         console.log(err)
