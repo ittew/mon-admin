@@ -12,3 +12,13 @@ export const login = data => {
     data
   })
 }
+
+/**
+ * 获取用户信息
+ * @returns promsie
+ */
+export const getUserInfo = () => {
+  return request({
+    url: '/sys/profile'
+  })
+}

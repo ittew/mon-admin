@@ -22,7 +22,6 @@ import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 import AppMain from './AppMain'
 import variables from '@/styles/variables.module.scss'
-console.log(variables)
 </script>
 
 <style lang="scss" scoped>
