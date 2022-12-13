@@ -54,6 +54,10 @@ div:focus {
   }
 }
 
+/* 覆盖element样式 */
 .el-input__inner::placeholder {
   color: #999;
+}
+.el-avatar {
+  --el-avatar-background-color: none;
 }
