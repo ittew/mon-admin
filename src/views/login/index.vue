@@ -134,13 +134,20 @@ $cursor: #fff;
       display: inline-block;
       height: 47px;
       width: 85%;
-
+      .el-input__wrapper {
+        background: transparent;
+        width: 100%;
+        box-shadow: none;
+        &.is-focus {
+          box-shadow: none;
+        }
+      }
       input {
         background: transparent;
         border: 0px;
         -webkit-appearance: none;
         border-radius: 0px;
-        padding: 12px 5px 12px 15px;
+        padding: 12px 5px;
         color: $light_gray;
         height: 47px;
         caret-color: $cursor;

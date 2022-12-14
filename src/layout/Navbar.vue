@@ -3,6 +3,7 @@
     <Hamburger />
     <Breadcrumb />
     <div class="right-menu">
+      <Language class="international hover-effect" />
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <el-avatar
@@ -10,7 +11,6 @@
             :size="40"
             :src="$store.getters.userInfo.avatar"
           ></el-avatar>
-          <i class="el-icon-s-tools"></i>
         </div>
         <template #dropdown>
           <el-dropdown-menu class="user-dropdown">
@@ -33,8 +33,9 @@
 <script setup>
 import Hamburger from '@/components/Hamburger'
 import Breadcrumb from '@/components/Breadcrumb'
-
+import Language from '@/components/LangSelect'
 import { useStore } from 'vuex'
+
 const store = useStore()
 const logout = () => {
   store.dispatch('user/logout')
@@ -53,8 +54,10 @@ const logout = () => {
   .right-menu {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     padding-right: 16px;
     margin-left: auto;
+    position: relative;
   }
   :deep .avatar-container {
     cursor: pointer;
@@ -64,11 +67,17 @@ const logout = () => {
       .el-avatar {
         margin-right: 12px;
       }
-      .el-icon-s-tools {
-        font-size: 20px;
-        position: relative;
-        bottom: 3px;
-      }
+    }
+  }
+  :deep .international {
+    display: inline-block;
+    padding: 0 18px 0 0;
+    font-size: 24px;
+    color: #5a5e66;
+    vertical-align: text-bottom;
+
+    &.hover-effect {
+      cursor: pointer;
     }
   }
 }
