@@ -14,7 +14,7 @@
 
 <script setup>
 import { isExternal as external } from '@/utils/validate.js'
-import { defineProps, computed } from 'vue'
+import { computed } from 'vue'
 const props = defineProps({
   icon: {
     type: String,
@@ -27,7 +27,7 @@ const props = defineProps({
 })
 /**
  * 判断是否为外部图标
-*/
+ */
 const isExternal = computed(() => external(props.icon))
 /**
  * 外部图标样式

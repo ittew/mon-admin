@@ -117,7 +117,7 @@ const publicRoutes = [
         component: () => import('@/views/profile'),
         meta: {
           title: 'profile',
-          icon: 'el-icon-user'
+          icon: 'personnel-info'
         }
       },
       {

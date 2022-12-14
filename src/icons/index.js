@@ -1,4 +1,4 @@
-import SvgIcon from '@/components/SvgIcon/index.vue'
+import SvgIcon from '@/components/SvgIcon.vue'
 
 export default app => {
   app.component('svgIcon', SvgIcon)

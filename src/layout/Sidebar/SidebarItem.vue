@@ -1,5 +1,5 @@
 <template>
-  <el-submenu v-if="route.children.length" :index="route.path">
+  <el-sub-menu v-if="route.children.length" :index="route.path">
     <template #title>
       <MenuItem :title="route.meta.title" :icon="route.meta.icon" />
     </template>
@@ -8,7 +8,7 @@
       :key="item.path"
       :route="item"
     />
-  </el-submenu>
+  </el-sub-menu>
   <el-menu-item :index="route.path" v-else>
     <MenuItem :title="route.meta.title" :icon="route.meta.icon" />
   </el-menu-item>

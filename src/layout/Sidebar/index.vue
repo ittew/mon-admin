@@ -2,7 +2,7 @@
   <div>
     <div class="logo-container">
       <el-avatar
-        size="small"
+        :size="32"
         shape="square"
         src="https://m.imooc.com/static/wap/static/common/img/logo-small@2x.png"
       ></el-avatar>
