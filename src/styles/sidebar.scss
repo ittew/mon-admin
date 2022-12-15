@@ -51,10 +51,6 @@
       overflow: hidden;
     }
 
-    .svg-icon {
-      margin-right: 8px;
-    }
-
     .sub-el-icon {
       margin-right: 12px;
       margin-left: -2px;
@@ -78,11 +74,11 @@
 
   .hideSidebar {
     .sidebar-container {
-      width: 54px !important;
+      width: $hideSideBarWidth !important;
     }
 
     .main-container {
-      margin-left: 54px;
+      margin-left: $hideSideBarWidth;
     }
 
     .submenu-title-noDropdown {
@@ -150,9 +146,6 @@
 
 .el-menu--vertical {
   & > .el-menu {
-    .svg-icon {
-      margin-right: 16px;
-    }
     .sub-el-icon {
       margin-right: 12px;
       margin-left: -2px;
@@ -163,18 +156,6 @@
   > .el-menu--popup {
     max-height: 100vh;
     overflow-y: auto;
-
-    &::-webkit-scrollbar-track-piece {
-      background: #d3dce6;
-    }
-
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: #99a9bf;
-      border-radius: 20px;
-    }
+    @include scrollBar;
   }
 }

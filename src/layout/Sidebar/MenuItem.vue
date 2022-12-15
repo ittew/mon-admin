@@ -1,7 +1,7 @@
 <template>
   <i v-if="icon.includes('el-icon')" class="sub-el-icon" :class="icon"></i>
   <i class="el-icon" v-else><svg-icon :icon="icon"></svg-icon></i>
-  <span>{{ title }}</span>
+  <span>{{ $t(`msg.route.${title}`) }}</span>
 </template>
 
 <script setup>

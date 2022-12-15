@@ -7,7 +7,8 @@
       :rules="loginRules"
     >
       <div class="title-container">
-        <h3 class="title">用户登录</h3>
+        <h3 class="title">{{ $t('msg.login.title') }}</h3>
+        <LangSelect class="lang-select" effect="light" />
       </div>
       <!-- username -->
       <el-form-item prop="username">
@@ -15,7 +16,7 @@
           <svgIcon icon="user" />
         </span>
         <el-input
-          placeholder="请输入用户名"
+          :placeholder="$t('msg.login.usernamePlaceholder')"
           name="username"
           v-model="loginForm.username"
         />
@@ -26,7 +27,7 @@
           <svgIcon icon="password" />
         </span>
         <el-input
-          placeholder="请输入密码"
+          :placeholder="$t('msg.login.passwordPlaceholder')"
           :type="passwordType"
           name="password"
           v-model="loginForm.password"
@@ -41,17 +42,21 @@
         @click="loginHandle"
         :loading="loading"
         style="width: 100%; margin-bottom: 30px"
-        >登录</el-button
+        >{{ $t('msg.login.loginBtn') }}</el-button
       >
+      <div class="tips" v-html="$t('msg.login.desc')"></div>
     </el-form>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import LangSelect from '@/components/LangSelect'
+import { ref, computed } from 'vue'
 import { validatePassword } from './rules'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+const i18n = useI18n()
 // 数据源
 const loginForm = ref({
   username: 'super-admin',
@@ -63,7 +68,7 @@ const loginRules = ref({
     {
       required: true,
       trigger: 'blur',
-      message: '用户为必填项'
+      message: computed(() => i18n.t('msg.login.usernameRule'))
     }
   ],
   password: [
@@ -164,7 +169,7 @@ $cursor: #fff;
 
   .title-container {
     position: relative;
-
+    line-height: 36px;
     .title {
       font-size: 26px;
       color: $light_gray;
@@ -182,6 +187,22 @@ $cursor: #fff;
     color: $dark_gray;
     cursor: pointer;
     user-select: none;
+  }
+  .lang-select {
+    position: absolute;
+    top: 6px;
+    right: 0;
+    background-color: #fff;
+    font-size: 20px;
+    padding: 3px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .tips {
+    font-size: 16px;
+    line-height: 28px;
+    color: #fff;
+    margin-bottom: 10px;
   }
 }
 </style>

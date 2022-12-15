@@ -22,7 +22,7 @@ const icon = computed(() =>
 .hamburger-container {
   padding: 0 16px;
   cursor: pointer;
-  line-height: 46px;
+  line-height: 48px;
   transition: background 0.5s;
   &:hover {
     background: rgba(0, 0, 0, 0.1);
