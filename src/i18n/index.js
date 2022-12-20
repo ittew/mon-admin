@@ -21,7 +21,8 @@ const i18n = createI18n({
   // 全局注入 $t 函数
   globalInjection: true,
   locale: store.getters.language || 'zh',
-  messages
+  messages,
+  warnHtmlMessage: false // 不提示 v-html xss 警告
 })
 
 export default i18n
