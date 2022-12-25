@@ -24,6 +24,9 @@ import SidebarMenu from './SidebarMenu.vue'
   display: flex;
   align-items: center;
   justify-content: center;
+  :deep .el-avatar {
+    --el-avatar-bg-color: none;
+  }
   .logo-title {
     margin-left: 10px;
     color: #fff;

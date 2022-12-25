@@ -5,7 +5,7 @@
     @close="closed"
     width="22%"
   >
-    <div class="center">
+    <div class="content">
       <p class="title">{{ $t('msg.theme.themeColorChange') }}</p>
       <el-color-picker v-model="mColor" :predefine="predefineColors" />
     </div>
@@ -23,6 +23,15 @@
 <script setup>
 import { ref } from 'vue'
 import { useStore } from 'vuex'
+import { getItem } from '@/utils/storage'
+import { MAIN_COLOR } from '@/constant'
+
+import {
+  generateNewStyle,
+  writeNewStyle,
+  generateColors
+} from '@/utils/theme.js'
+
 defineProps({
   modelValue: {
     type: Boolean,
@@ -53,14 +62,21 @@ const mColor = ref(store.getters.mainColor)
 const closed = () => {
   emits('update:modelValue', false)
 }
-const confirm = () => {
+const confirm = async () => {
+  // 获取主题色
+  const newStyleText = await generateNewStyle(mColor.value)
+  // 写入主题色
+  writeNewStyle(newStyleText)
+  // 保存最新主题色
   store.commit('theme/setMainColor', mColor.value)
+  console.log(generateColors(getItem(MAIN_COLOR)))
+  // 关闭dialog
   closed()
 }
 </script>
 
 <style lang="scss" scoped>
-.center {
+.content {
   text-align: center;
   .title {
     margin-bottom: 12px;

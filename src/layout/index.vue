@@ -9,7 +9,7 @@
     <sidebar
       id="guide-sidebar"
       class="sidebar-container"
-      :style="{ 'background-color': variables.menuBg }"
+      :style="{ 'background-color': $store.getters.cssVar.menuBg }"
     />
     <div class="main-container">
       <div class="fixed-header">
@@ -26,7 +26,6 @@
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 import AppMain from './AppMain'
-import variables from '@/styles/variables.module.scss'
 </script>
 
 <style lang="scss" scoped>
