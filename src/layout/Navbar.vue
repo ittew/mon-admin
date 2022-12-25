@@ -3,6 +3,7 @@
     <Hamburger />
     <Breadcrumb />
     <div class="right-menu">
+      <Screenfull class="right-menu-item hover-effect" />
       <ThemeSelect class="right-menu-item hover-effect" />
       <Language class="right-menu-item hover-effect" />
       <el-dropdown class="avatar-container" trigger="click">
@@ -36,6 +37,7 @@ import Hamburger from '@/components/Hamburger'
 import Breadcrumb from '@/components/Breadcrumb'
 import Language from '@/components/LangSelect'
 import ThemeSelect from '@/components/ThemeSelect'
+import Screenfull from '@/components/Screenfull'
 import { useStore } from 'vuex'
 
 const store = useStore()
