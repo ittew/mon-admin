@@ -24,6 +24,7 @@ import { filterRoutes, generateMenus } from '@/utils/route.js'
 const router = useRouter()
 const routes = computed(() => {
   const fRoutes = filterRoutes(router.getRoutes())
+  console.log(fRoutes, 'router')
   return generateMenus(fRoutes)
 })
 const activeMenu = computed(() => {
