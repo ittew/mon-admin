@@ -65,6 +65,7 @@ export default {
     close: '关闭',
     next: '下一个',
     prev: '上一个',
+    finish: '完成',
     guideTitle: '引导',
     guideDesc: '打开引导功能',
     hamburgerTitle: '汉堡按钮',

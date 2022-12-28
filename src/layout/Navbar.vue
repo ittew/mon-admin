@@ -1,8 +1,9 @@
 <template>
   <div class="navbar">
     <Hamburger />
-    <Breadcrumb />
+    <Breadcrumb id="guide-breadcrumb" />
     <div class="right-menu">
+      <Guide class="right-menu-item hover-effect" />
       <HeaderSearch class="right-menu-item hover-effect" />
       <Screenfull class="right-menu-item hover-effect" />
       <ThemeSelect class="right-menu-item hover-effect" />
@@ -40,6 +41,7 @@ import Language from '@/components/LangSelect'
 import ThemeSelect from '@/components/ThemeSelect'
 import Screenfull from '@/components/Screenfull'
 import HeaderSearch from '@/components/HeaderSearch'
+import Guide from '@/components/Guide'
 
 import { useStore } from 'vuex'
 
