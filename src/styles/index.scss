@@ -1,6 +1,7 @@
 @import './variables.module.scss';
 @import './mixin.scss';
 @import './sidebar.scss';
+@import './transition.scss';
 
 html,
 body {
@@ -60,4 +61,9 @@ div:focus {
 }
 .el-avatar {
   --el-avatar-bg-color: none;
+}
+.el-input {
+  --el-input-focus-border-color: none;
+  --el-input-border-color: none;
+  --el-input-hover-border-color: none;
 }

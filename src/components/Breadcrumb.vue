@@ -58,17 +58,4 @@ const linkHoverColor = store.getters.cssVar.menuBg
     }
   }
 }
-// 面包屑 动画
-.breadcrumb-enter-active,
-.breadcrumb-leave-active {
-  transition: all 0.5s;
-}
-.breadcrumb-enter-from,
-.breadcrumb-leave-active {
-  opacity: 0;
-  transform: translateX(20px);
-}
-.breadcrumb-leave-active {
-  position: absolute;
-}
 </style>
