@@ -69,6 +69,6 @@ watchSwitchLang(() => {
   width: 100%;
   position: relative;
   overflow: hidden;
-  padding: 96px 20px 20px;
+  padding: 104px 20px 20px;
 }
 </style>
