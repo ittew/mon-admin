@@ -1,7 +1,137 @@
 <template>
-  <div>用户管理</div>
+  <div class="user-manage-container">
+    <el-card class="header">
+      <div>
+        <el-button type="primary" @click="importExcelHandle">{{
+          $t('msg.excel.importExcel')
+        }}</el-button>
+        <el-button type="success">{{ $t('msg.excel.exportExcel') }}</el-button>
+      </div>
+    </el-card>
+    <el-card>
+      <el-table :data="tableData" border style="width: 100%">
+        <el-table-column label="#" type="index"></el-table-column>
+        <el-table-column
+          :label="$t('msg.excel.name')"
+          prop="username"
+        ></el-table-column>
+        <el-table-column
+          :label="$t('msg.excel.mobile')"
+          prop="mobile"
+        ></el-table-column>
+        <el-table-column :label="$t('msg.excel.avatar')">
+          <template v-slot="{ row }">
+            <el-image
+              class="avatar"
+              :src="row.avatar"
+              :preview-src-list="[row.avatar]"
+            ></el-image>
+          </template>
+        </el-table-column>
+        <el-table-column :label="$t('msg.excel.role')">
+          <template #default="{ row }">
+            <div v-if="row.role && row.role.length > 0">
+              <el-tag v-for="item in row.role" :key="item.id" size="small">{{
+                item.title
+              }}</el-tag>
+            </div>
+            <div v-else>
+              <el-tag size="small">{{ $t('msg.excel.defaultRole') }}</el-tag>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column :label="$t('msg.excel.openTime')">
+          <template #default="{ row }">
+            {{ $filters.dateFormat(row.openTime) }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          :label="$t('msg.excel.action')"
+          fixed="right"
+          width="260"
+        >
+          <template #default>
+            <el-button type="primary" size="small">{{
+              $t('msg.excel.show')
+            }}</el-button>
+            <el-button type="info" size="small">{{
+              $t('msg.excel.showRole')
+            }}</el-button>
+            <el-button type="danger" size="small">{{
+              $t('msg.excel.remove')
+            }}</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+
+      <el-pagination
+        class="pagination"
+        v-model:current-page="pageNo"
+        v-model:page-size="pageSize"
+        :page-sizes="[5, 10, 20]"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+      />
+    </el-card>
+  </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { getUserManageList } from '@/api/userManage'
+import { ref, onActivated } from 'vue'
+import { useRouter } from 'vue-router'
 
-<style lang="scss" scoped></style>
+const tableData = ref([])
+const total = ref(0)
+const pageNo = ref(1)
+const pageSize = ref(5)
+const getListData = async () => {
+  const result = await getUserManageList({
+    page: pageNo.value,
+    size: pageSize.value
+  })
+  tableData.value = result.list
+  total.value = result.total
+}
+onActivated(getListData)
+// 分页大小切换
+const handleSizeChange = currentSize => {
+  pageSize.value = currentSize
+  getListData()
+}
+// 页码切换
+const handleCurrentChange = currentPage => {
+  pageNo.value = currentPage
+  getListData()
+}
+// excel导入
+const router = useRouter()
+const importExcelHandle = () => {
+  router.push('/user/import')
+}
+</script>
+
+<style lang="scss" scoped>
+.user-manage-container {
+  .header {
+    margin-bottom: 22px;
+    text-align: right;
+  }
+  :deep .avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+  }
+
+  :deep .el-tag {
+    margin-right: 6px;
+  }
+
+  .pagination {
+    margin-top: 20px;
+    justify-content: center;
+  }
+}
+</style>
