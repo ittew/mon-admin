@@ -50,14 +50,14 @@
           fixed="right"
           width="260"
         >
-          <template #default>
+          <template #default="{ row }">
             <el-button type="primary" size="small">{{
               $t('msg.excel.show')
             }}</el-button>
             <el-button type="info" size="small">{{
               $t('msg.excel.showRole')
             }}</el-button>
-            <el-button type="danger" size="small">{{
+            <el-button type="danger" size="small" @click="onRemoveClick(row)">{{
               $t('msg.excel.remove')
             }}</el-button>
           </template>
@@ -79,8 +79,10 @@
 </template>
 
 <script setup>
-import { getUserManageList } from '@/api/userManage'
+import { getUserManageList, deleteUser } from '@/api/userManage'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { ref, onActivated } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 
 const tableData = ref([])
@@ -110,6 +112,22 @@ const handleCurrentChange = currentPage => {
 const router = useRouter()
 const importExcelHandle = () => {
   router.push('/user/import')
+}
+// 删除员工
+const i18n = useI18n()
+const onRemoveClick = row => {
+  ElMessageBox.confirm(
+    i18n.t('msg.excel.dialogTitle1') +
+      row.username +
+      i18n.t('msg.excel.dialogTitle2'),
+    { type: 'warning' }
+  )
+    .then(async () => {
+      await deleteUser(row._id)
+      ElMessage.success(i18n.t('msg.excel.removeSuccess'))
+      getListData()
+    })
+    .catch(() => {})
 }
 </script>
 

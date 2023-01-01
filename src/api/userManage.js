@@ -24,3 +24,14 @@ export const userBatchImport = data => {
     data
   })
 }
+
+/**
+ * 删除指定数据
+ * @param {*} data
+ * @returns promsie
+ */
+export const deleteUser = id => {
+  return request({
+    url: `/user-manage/delete/${id}`
+  })
+}
