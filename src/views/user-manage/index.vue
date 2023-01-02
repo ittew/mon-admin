@@ -5,7 +5,9 @@
         <el-button type="primary" @click="importExcelHandle">{{
           $t('msg.excel.importExcel')
         }}</el-button>
-        <el-button type="success">{{ $t('msg.excel.exportExcel') }}</el-button>
+        <el-button type="success" @click="exportToExcelHandle">{{
+          $t('msg.excel.exportExcel')
+        }}</el-button>
       </div>
     </el-card>
     <el-card>
@@ -51,9 +53,12 @@
           width="260"
         >
           <template #default="{ row }">
-            <el-button type="primary" size="small">{{
-              $t('msg.excel.show')
-            }}</el-button>
+            <el-button
+              type="primary"
+              size="small"
+              @click="showUserInfo(row._id)"
+              >{{ $t('msg.excel.show') }}</el-button
+            >
             <el-button type="info" size="small">{{
               $t('msg.excel.showRole')
             }}</el-button>
@@ -75,6 +80,7 @@
         @current-change="handleCurrentChange"
       />
     </el-card>
+    <ExportDialog v-model:myValue="showDialog" />
   </div>
 </template>
 
@@ -84,6 +90,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { ref, onActivated } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
+import ExportDialog from './components/ExportDialog.vue'
 
 const tableData = ref([])
 const total = ref(0)
@@ -113,6 +120,10 @@ const router = useRouter()
 const importExcelHandle = () => {
   router.push('/user/import')
 }
+// 查看员工详情
+const showUserInfo = id => {
+  router.push(`/user/info/${id}`)
+}
 // 删除员工
 const i18n = useI18n()
 const onRemoveClick = row => {
@@ -128,6 +139,11 @@ const onRemoveClick = row => {
       getListData()
     })
     .catch(() => {})
+}
+// 点击导出
+const showDialog = ref(false)
+const exportToExcelHandle = () => {
+  showDialog.value = true
 }
 </script>
 

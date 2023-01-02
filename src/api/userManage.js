@@ -35,3 +35,23 @@ export const deleteUser = id => {
     url: `/user-manage/delete/${id}`
   })
 }
+
+/**
+ * 获取所有员工列表
+ * @returns promsie
+ */
+export const getAllUserManageList = () => {
+  return request({
+    url: '/user-manage/all-list'
+  })
+}
+
+/**
+ * 获取所有员工列表
+ * @returns promsie
+ */
+export const getUserInfoById = () => {
+  return request({
+    url: '/user-manage/detial/:id'
+  })
+}
