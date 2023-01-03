@@ -50,8 +50,8 @@ export const getAllUserManageList = () => {
  * 获取所有员工列表
  * @returns promsie
  */
-export const getUserInfoById = () => {
+export const getUserDetail = id => {
   return request({
-    url: '/user-manage/detial/:id'
+    url: `/user-manage/detail/${id}`
   })
 }
