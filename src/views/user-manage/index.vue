@@ -59,7 +59,7 @@
               @click="showUserInfo(row._id)"
               >{{ $t('msg.excel.show') }}</el-button
             >
-            <el-button type="info" size="small">{{
+            <el-button type="info" size="small" @click="showRoleHandle(row)">{{
               $t('msg.excel.showRole')
             }}</el-button>
             <el-button type="danger" size="small" @click="onRemoveClick(row)">{{
@@ -81,16 +81,22 @@
       />
     </el-card>
     <ExportDialog v-model:myValue="showDialog" />
+    <RoleDialod
+      v-model="showRoleDialog"
+      :userId="selectUserId"
+      @updateRole="getListData"
+    />
   </div>
 </template>
 
 <script setup>
 import { getUserManageList, deleteUser } from '@/api/userManage'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { ref, onActivated } from 'vue'
+import { ref, onActivated, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import ExportDialog from './components/ExportDialog.vue'
+import RoleDialod from './components/RolesDialog.vue'
 
 const tableData = ref([])
 const total = ref(0)
@@ -145,6 +151,17 @@ const showDialog = ref(false)
 const exportToExcelHandle = () => {
   showDialog.value = true
 }
+// 分配角色弹窗
+const showRoleDialog = ref(false)
+const selectUserId = ref('')
+const showRoleHandle = row => {
+  showRoleDialog.value = true
+  selectUserId.value = row._id
+}
+// 保证每次打开重新获取用户角色数据
+watch(showRoleDialog, val => {
+  if (!val) selectUserId.value = ''
+})
 </script>
 
 <style lang="scss" scoped>
