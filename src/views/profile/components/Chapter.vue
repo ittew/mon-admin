@@ -18,8 +18,7 @@ import { chapter } from '@/api/index'
 import { ref } from 'vue'
 const chapterData = ref([])
 const getChapterData = async () => {
-  const data = await chapter()
-  chapterData.value = data.sort((a, b) => a.id - b.id)
+  chapterData.value = await chapter()
 }
 getChapterData()
 </script>

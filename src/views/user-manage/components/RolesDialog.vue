@@ -14,7 +14,7 @@
     <template #footer>
       <div class="dialog-footer">
         <el-button @click="closed">{{ $t('msg.universal.cancel') }}</el-button>
-        <el-button type="primary" @click="onConfirm">
+        <el-button type="primary" :loading="loading" @click="onConfirm">
           {{ $t('msg.universal.confirm') }}
         </el-button>
       </div>
@@ -40,10 +40,13 @@ const props = defineProps({
 })
 const emits = defineEmits(['update:modelValue', 'updateRole'])
 const closed = () => {
+  loading.value = false
   emits('update:modelValue', false)
 }
+const loading = ref(false)
 const i18n = useI18n()
 const onConfirm = async () => {
+  loading.value = true
   const roles = currrentUserRoles.value.map(title => {
     return allRoleList.value.find(role => role.title === title)
   })
@@ -52,8 +55,8 @@ const onConfirm = async () => {
   emits('updateRole')
   closed()
 }
-const allRoleList = ref([])
 // 获取所有角色
+const allRoleList = ref([])
 const getRoleList = async () => {
   allRoleList.value = await roleList()
 }
